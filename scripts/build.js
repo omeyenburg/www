@@ -144,12 +144,13 @@ async function buildPage(template, filePath) {
   console.assert(html.includes("{{content}}"));
   html = html.replace("{{content}}", content);
 
+  const topLevelPage = pagePrefix.split('/')[0];
   const labeledPlaceholders = [...html.matchAll(/\{\{(.*?):(.*?)\}\}/g)];
   labeledPlaceholders.forEach(placeholder => {
     if (placeholder[1] === "nav-button") {
       const query = `{{${placeholder[1]}:${placeholder[2]}}}`;
       console.assert(html.includes(query));
-      if (placeholder[2] === pagePrefix) {
+      if (placeholder[2] === topLevelPage) {
         html = html.replace(query, 'class="nav-item-active"');
       } else {
         html = html.replace(query, "");

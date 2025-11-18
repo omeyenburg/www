@@ -80,6 +80,8 @@ h3 {
 }
 
 p,
+li,
+img,
 span {
   text-align: left;
   color: var(--color-fg-default);
@@ -98,8 +100,14 @@ hr {
 }
 
 .button {
-  margin-top: 40px;
+  margin: 40px 10px 0px 10px;
   text-align: center;
+}
+
+.button-box {
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }
 
 .button>a {

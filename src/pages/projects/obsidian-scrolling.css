@@ -1,0 +1,38 @@
+.back-button {
+    /* Positioning */
+    position: fixed;
+    top: 70px;
+    left: 2px;
+
+    /* Circle styling */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 53px;
+    height: 53px;
+    border-radius: 50%; /* Makes it a circle */
+    background-color: #333; /* Dark background color for the circle */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #555; /* Slightly lighter on hover */
+}
+
+.back-button::before,
+.back-button::after {
+  content: '';
+  width: 16px;
+  height: 3px;
+  background-color: var(--color-fg-default);
+  /* box-shadow: 0 0 2px var(--color-fg-default); */
+}
+
+.back-button::before {
+  transform: translate(7px, 5px) rotate(45deg);
+}
+
+.back-button::after {
+  transform: translate(-9px, -5px) rotate(-45deg);
+}

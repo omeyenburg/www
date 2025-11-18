@@ -13,15 +13,13 @@ main {
 .project-block {
     justify-content: center;
     margin: 25px auto;
-    align-items: center;
+    align-items: stretch;
     display: flex;
     background-color: var(--color-bg-surface);
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-
-    align-items: stretch;
 
     user-select: none;
     -webkit-user-select: none;
@@ -40,6 +38,7 @@ main {
     width: 300px;
     height: auto;
     display: flex;
+    position: relative;
 }
 
 .project-image {
@@ -47,16 +46,16 @@ main {
     height: 100%;
     object-fit: cover;
     display: block;
+    object-position: center top;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }
 
 /* Extra class to apply to specific images */
 .project-image-left {
-    object-position: left center;
+    object-position: left top;
 }
 
-/* Project Content (Title, Description, Tags, Links) */
 .project-content {
     flex-grow: 1;
     padding: 25px;
@@ -78,8 +77,25 @@ main {
     flex-grow: 1;
 }
 
-/* --- Responsive Adjustments --- */
+/* Wide view */
+@media (min-width: 899px) {
+
+    /* Create a fading overlay */
+    .project-image-container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 10%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+        pointer-events: none;
+    }
+}
+
+/* Narrow view */
 @media (max-width: 900px) {
+
     /* Stack image and content vertically on smaller screens */
     .project-block {
         flex-direction: column;

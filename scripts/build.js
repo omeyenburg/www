@@ -21,7 +21,7 @@ const src = path.resolve("src");
 const dist = path.resolve("dist");
 
 await clean();
-await addAssets();
+await addPublicRessources();
 await buildPages();
 
 async function clean() {
@@ -34,9 +34,8 @@ async function clean() {
   fs.mkdirSync(dist, { recursive: true });
 }
 
-async function addAssets() {
+async function addPublicRessources() {
   fs.cpSync(path.join(src, "public"), dist, { recursive: true });
-  fs.cpSync(path.join(src, "assets"), path.join(dist, "assets"), { recursive: true });
 }
 
 async function buildPages() {
@@ -119,7 +118,7 @@ async function buildPage(template, filePath) {
   if (fs.existsSync(jsPath)) {
     const js = await minifyJS(fs.readFileSync(jsPath, "utf-8"));
     fs.writeFileSync(path.join(dist, pagePrefix + ".js"), js);
-    html = html.replace("{{page-js}}", `<script src="${pagePrefix}.js" defer></script>`);
+    html = html.replace("{{page-js}}", `<script src="/${pagePrefix}.js" defer></script>`);
   } else {
     html = html.replace("{{page-js}}", "");
   }
@@ -128,7 +127,7 @@ async function buildPage(template, filePath) {
   if (fs.existsSync(cssPath)) {
     const css = await minifyCSS(fs.readFileSync(cssPath, "utf-8"));
     fs.writeFileSync(path.join(dist, pagePrefix + ".css"), css);
-    html = html.replace("{{page-css}}", `<link rel="stylesheet" href="${pagePrefix}.css">`);
+    html = html.replace("{{page-css}}", `<link rel="stylesheet" href="/${pagePrefix}.css">`);
   } else {
     html = html.replace("{{page-css}}", "");
   }
